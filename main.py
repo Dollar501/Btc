@@ -11,13 +11,27 @@ from flask import Flask, jsonify
 from telegram import Update, WebAppInfo, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup
 from telegram.ext import (
     Application, CommandHandler, MessageHandler, filters, ContextTypes,
-    CallbackQueryHandler
+    CallbackQueryHandler, ConversationHandler
 )
 
 # Import bot modules
 from localization import get_text, set_language_and_reply, build_language_menu
 from data_store import MINING_HARDWARE, INVESTMENT_PLANS, FAQ_DATA, STATIC_MESSAGES
 from helpers import build_main_menu
+from auth_handlers import (
+    start_registration, receive_first_name, receive_last_name,
+    receive_email, receive_phone, cancel_registration,
+    show_account_info, show_transactions, start_deposit,
+    show_deposit_wallet, start_withdrawal,
+    FIRST_NAME, LAST_NAME, EMAIL, PHONE
+)
+from admin_panel import (
+    show_admin_panel, admin_show_users, admin_show_deposits,
+    admin_approve_deposit, admin_reject_deposit, admin_show_withdrawals,
+    admin_approve_withdrawal, admin_reject_withdrawal, admin_show_stats,
+    admin_show_settings
+)
+from database import db
 
 # Load environment variables
 load_dotenv()
@@ -298,9 +312,44 @@ def main() -> None:
 
     application = Application.builder().token(BOT_TOKEN).build()
 
+    # --- Registration Conversation Handler ---
+    registration_handler = ConversationHandler(
+        entry_points=[CallbackQueryHandler(start_registration, pattern=r"^start_registration$")],
+        states={
+            FIRST_NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, receive_first_name)],
+            LAST_NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, receive_last_name)],
+            EMAIL: [MessageHandler(filters.TEXT & ~filters.COMMAND, receive_email)],
+            PHONE: [MessageHandler(filters.TEXT & ~filters.COMMAND, receive_phone)],
+        },
+        fallbacks=[CallbackQueryHandler(cancel_registration, pattern=r"^cancel$")],
+        allow_reentry=True
+    )
+    
     # --- Register Handlers ---
     application.add_handler(CommandHandler("start", start_command))
+    application.add_handler(registration_handler)
     application.add_handler(MessageHandler(filters.StatusUpdate.WEB_APP_DATA, web_app_data_handler))
+    
+    # Account Management
+    application.add_handler(CallbackQueryHandler(show_account_info, pattern=r"^account_info$"))
+    application.add_handler(CallbackQueryHandler(show_transactions, pattern=r"^view_transactions$"))
+    application.add_handler(CallbackQueryHandler(start_deposit, pattern=r"^start_deposit$"))
+    application.add_handler(CallbackQueryHandler(show_deposit_wallet, pattern=r"^deposit_wallet_\d+$"))
+    application.add_handler(CallbackQueryHandler(start_withdrawal, pattern=r"^start_withdrawal$"))
+    
+    # Admin Handlers
+    application.add_handler(CallbackQueryHandler(show_admin_panel, pattern=r"^admin_panel$"))
+    application.add_handler(CallbackQueryHandler(admin_show_users, pattern=r"^admin_users$"))
+    application.add_handler(CallbackQueryHandler(admin_show_deposits, pattern=r"^admin_deposits$"))
+    application.add_handler(CallbackQueryHandler(admin_approve_deposit, pattern=r"^approve_dep_\d+$"))
+    application.add_handler(CallbackQueryHandler(admin_reject_deposit, pattern=r"^reject_dep_\d+$"))
+    application.add_handler(CallbackQueryHandler(admin_show_withdrawals, pattern=r"^admin_withdrawals$"))
+    application.add_handler(CallbackQueryHandler(admin_approve_withdrawal, pattern=r"^approve_wth_\d+$"))
+    application.add_handler(CallbackQueryHandler(admin_reject_withdrawal, pattern=r"^reject_wth_\d+$"))
+    application.add_handler(CallbackQueryHandler(admin_show_stats, pattern=r"^admin_stats$"))
+    application.add_handler(CallbackQueryHandler(admin_show_settings, pattern=r"^admin_settings$"))
+    
+    # Original Handlers
     application.add_handler(CallbackQueryHandler(main_menu_handler, pattern=r"^main_menu$"))
     application.add_handler(CallbackQueryHandler(show_featured_plans, pattern=r"^featured_plans$"))
     application.add_handler(CallbackQueryHandler(show_static_message, pattern=r"^(how_it_works|privacy_policy)$"))

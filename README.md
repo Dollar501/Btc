@@ -1,52 +1,91 @@
-# 🚀 BTC-CloudX - Enhanced Cloud Mining Investment Platform
+# 🚀 BTC-CloudX - نظام شامل لإدارة الاستثمار في التعدين السحابي
 
-## 🌟 Overview
+## 🌟 نظرة عامة
 
-BTC-CloudX is a comprehensive cloud mining investment platform featuring both a Telegram bot interface and a modern web application. The platform supports multiple languages (Arabic, English, Chinese) and provides users with secure investment opportunities in Bitcoin cloud mining.
+BTC-CloudX هي منصة متكاملة لإدارة الاستثمار في التعدين السحابي للبيتكوين، تتضمن:
+- 🤖 **بوت Telegram** متطور مع نظام حسابات كامل
+- 🌐 **تطبيق ويب** حديث مع واجهة تفاعلية
+- 💼 **لوحة تحكم Admin** لإدارة المنصة
+- 💰 **نظام إيداع وسحب** متكامل
+- 🔐 **REST API** للتواصل الآمن
+- 📊 **قاعدة بيانات** منظمة لتتبع كل العمليات
 
-## ✨ Recent Enhancements
+**الإصدار:** 2.0.0 (محدّث بالكامل)  
+**اللغات المدعومة:** العربية، الإنجليزية، الصينية
 
-### 🎨 UI/UX Improvements
-- **3D Bitcoin Animation**: Stunning animated Bitcoin symbols floating from distance to screen
-- **Language Selector**: Elegant dropdown menu for seamless language switching
-- **Enhanced Styling**: Modern glass-morphism design with improved visual effects
-- **Responsive Design**: Optimized for mobile and desktop devices
-- **Smooth Animations**: Enhanced button interactions and page transitions
+## ✨ المميزات الجديدة في النسخة 2.0
 
-### 🌐 Multi-Language Support
-- **Complete Translation**: All interface elements now support Arabic, English, and Chinese
-- **Dynamic Content**: Investment plans, hardware info, and FAQ load dynamically in selected language
-- **Improved Text Quality**: Removed underscores, added emojis, enhanced readability
-- **Consistent Branding**: Unified messaging across all languages
+### 👥 نظام إدارة الحسابات
+- ✅ **تسجيل مستخدمين** عبر البوت مع بيانات كاملة
+- ✅ **كود تحقق فريد** لكل مستخدم (BTC-X-77-XXXXX)
+- ✅ **ملف شخصي** مع رصيد ومعلومات كاملة
+- ✅ **سجل معاملات** شامل لكل مستخدم
 
-### 🔧 Technical Improvements
-- **Modular JavaScript**: Enhanced script.js with class-based architecture
-- **Better Performance**: Optimized animations and resource loading
-- **Cross-Browser Compatibility**: Improved support for different browsers
-- **Security Enhancements**: Better data handling and validation
+### 💰 نظام الإيداع والسحب
+- ✅ **5 محافظ رقمية**: USDT (TRC20/ERC20), BTC, ETH, BNB
+- ✅ **طلبات إيداع** مع رفع صور الإثبات
+- ✅ **طلبات سحب** إلى محافظ المستخدمين
+- ✅ **تتبع حالة الطلبات**: معلقة/موافق/مرفوض
 
-## 📁 Project Structure
+### 🔐 لوحة تحكم Admin
+- ✅ **إدارة المستخدمين**: عرض وتعديل جميع المستخدمين
+- ✅ **الموافقة على الإيداعات**: مراجعة ومعالجة الطلبات
+- ✅ **معالجة السحوبات**: تأكيد وتحويل الأموال
+- ✅ **إحصائيات شاملة**: الخزنة، الإيداعات، السحوبات
+- ✅ **إدارة المحافظ**: تحديث عناوين محافظ الشركة
+
+### 🌐 REST API
+- ✅ **مصادقة آمنة** بـ JWT Tokens
+- ✅ **Endpoints كاملة** لجميع العمليات
+- ✅ **CORS Support** للتكامل مع الموقع
+- ✅ **رفع ملفات** للصور والإثباتات
+
+### 📊 قاعدة البيانات
+- ✅ **SQLite محلية** سهلة النشر
+- ✅ **8 جداول منظمة**: مستخدمين، محافظ، معاملات، إيداعات، سحوبات
+- ✅ **Foreign Keys** لربط البيانات
+- ✅ **Indexes** لتحسين الأداء
+
+## 📁 هيكل المشروع المُحدث
 
 ```
-BTC-BOT/
-├── 🌐 Frontend
-│   ├── index.html          # Main web application
-│   ├── styles.css          # Enhanced styling with animations
-│   ├── script.js           # Enhanced JavaScript with 3D animations
-│   └── languages.js        # Multi-language support
-├── 🤖 Backend (Python)
-│   ├── main.py            # Main bot application
-│   ├── localization.py    # Enhanced bot translations
-│   ├── data_store.py      # Data models and static content
-│   ├── command_processors.py # Bot command handlers
-│   ├── helpers.py         # Utility functions
-│   └── devices.py         # Hardware management
-├── 📊 Data & Config
-│   ├── .env              # Environment variables
-│   ├── requirements.txt  # Python dependencies
-│   └── img/             # Images and assets
-└── 📖 Documentation
-    └── README.md         # This file
+BTC-CloudX-main/
+├── 🤖 البوت والخادم
+│   ├── main.py                 # البوت الرئيسي + Flask server
+│   ├── database.py             # قاعدة البيانات الكاملة ⭐ جديد
+│   ├── api.py                  # REST API ⭐ جديد
+│   ├── auth_handlers.py        # نظام التسجيل والحسابات ⭐ جديد
+│   ├── admin_panel.py          # لوحة تحكم Admin ⭐ جديد
+│   ├── localization.py         # الترجمات
+│   ├── data_store.py           # بيانات الخطط والأجهزة
+│   ├── helpers.py              # دوال مساعدة (محدثة)
+│   └── devices.py              # إدارة الأجهزة
+│
+├── 🌐 الموقع
+│   ├── index.html              # الصفحة الرئيسية
+│   ├── account.html            # صفحة الحساب ⭐ جديد
+│   ├── account.js              # JavaScript للحساب ⭐ جديد
+│   ├── script.js               # JavaScript الرئيسي
+│   ├── languages.js            # ملف اللغات
+│   └── styles.css              # التصميم
+│
+├── 📊 البيانات
+│   ├── btc_cloudx.db           # قاعدة البيانات ⭐ (تُنشأ تلقائياً)
+│   └── uploads/                # مجلد صور الإيداعات ⭐
+│       └── proofs/
+│
+├── ⚙️ الإعدادات
+│   ├── .env                    # المتغيرات البيئية
+│   ├── .env.example            # قالب البيئة (محدث)
+│   ├── requirements.txt        # المكتبات (محدث)
+│   ├── runtime.txt             # إصدار Python
+│   ├── Procfile                # للنشر
+│   └── render.yaml             # إعدادات Render
+│
+└── 📖 التوثيق
+    ├── README.md               # هذا الملف
+    ├── SETUP_GUIDE.md          # دليل الإعداد الشامل ⭐ جديد
+    └── QUICK_START.md          # البدء السريع ⭐ جديد
 ```
 
 ## 🚀 Features
@@ -66,40 +105,41 @@ BTC-BOT/
 - **Subscription System**: Unique user codes
 - **Support Integration**: Direct contact with support team
 
-## 🛠️ Installation & Setup
+## 🛠️ التثبيت والإعداد
 
-### Prerequisites
-- Python 3.8+
-- Node.js (for development)
-- Telegram Bot Token
+### المتطلبات الأساسية
+- ✅ Python 3.11+
+- ✅ توكن بوت Telegram من @BotFather
+- ✅ معرف Telegram للأدمن
 
-### Quick Start
+### 🚀 البدء السريع (5 دقائق)
 
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd BTC-BOT
-   ```
+**اقرأ دليل البدء السريع الكامل:** [`QUICK_START.md`](QUICK_START.md)
 
-2. **Install Python dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
+```bash
+# 1. انسخ ملف البيئة
+cp .env.example .env
 
-3. **Configure environment variables**
-   ```bash
-   cp .env.example .env
-   # Edit .env with your configuration
-   ```
+# 2. ثبّت المكتبات
+pip install -r requirements.txt
 
-4. **Run the application**
-   ```bash
-   python main.py
-   ```
+# 3. عدّل .env (أضف التوكن ومعرف Admin)
 
-5. **Open web interface**
-   - Open `index.html` in your browser
-   - Or serve it using a local web server
+# 4. شغّل البوت
+python main.py
+```
+
+✅ **تم! البوت شغال الآن**
+
+### 📖 الإعداد الشامل
+
+**اقرأ الدليل الكامل:** [`SETUP_GUIDE.md`](SETUP_GUIDE.md)
+
+يشمل:
+- تخصيص المحافظ الرقمية
+- إعداد API
+- النشر على Render/Heroku
+- حل المشاكل الشائعة
 
 ## 🌐 Language Support
 
