@@ -1,0 +1,36 @@
+{
+  "name": "btc-cloudx",
+  "version": "1.0.0",
+  "description": "BTC-CloudX is a comprehensive cloud mining investment platform featuring both a Telegram bot interface and a modern web application. The platform supports multiple languages (Arabic, English, Chinese) and provides users with secure investment opportunities in Bitcoin cloud mining.",
+  "main": "index.html",
+  "scripts": {
+    "build": "npx tailwindcss -i ./input.css -o ./styles.css",
+    "build:watch": "npx tailwindcss -i ./input.css -o ./styles.css --watch",
+    "dev": "npx tailwindcss -i ./input.css -o ./styles.css --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "bitcoin",
+    "cloud-mining",
+    "cryptocurrency",
+    "investment",
+    "telegram-bot",
+    "web-app",
+    "multilingual"
+  ],
+  "author": "Sayed",
+  "license": "MIT",
+  "type": "commonjs",
+  "devDependencies": {
+    "tailwindcss": "^4.1.11",
+    "@tailwindcss/cli": "^4.1.11"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/btc-cloudx.git"
+  },
+  "homepage": "https://yourdomain.com",
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

@@ -1,0 +1,184 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --- VARIABLES & BASE STYLES --- */
+:root {
+    --tg-theme-bg-color: #0d1117;
+    --tg-theme-text-color: #e6edf3;
+    --tg-theme-hint-color: #7d8590;
+    --tg-theme-link-color: #58a6ff;
+    --tg-theme-button-color: #238636;
+    --tg-theme-button-text-color: #ffffff;
+    --tg-theme-secondary-bg-color: #161b22;
+}
+body {
+    background: linear-gradient(135deg, #0d1117 0%, #1a1f2e 100%);
+    color: var(--tg-theme-text-color);
+    font-family: 'Cairo', 'Roboto', 'Noto Sans SC', sans-serif;
+    margin: 0;
+    padding-bottom: 90px; /* Space for bottom nav */
+    background-attachment: fixed;
+    overflow-x: hidden;
+    perspective: 1000px;
+}
+html {
+    scroll-behavior: smooth;
+}
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--tg-theme-bg-color); }
+::-webkit-scrollbar-thumb { background: #f7931a; border-radius: 4px; }
+
+/* --- PAGE & NAVIGATION STRUCTURE --- */
+.page { 
+    display: none; 
+    animation: fadeIn 0.5s ease-out;
+    min-height: calc(100vh - 160px);
+}
+.page.active { 
+    display: block;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, rgba(13, 17, 23, 0.8), rgba(22, 27, 34, 0.8));
+    backdrop-filter: blur(15px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 50;
+    padding: 8px 4px env(safe-area-inset-bottom);
+}
+.bottom-nav .flex {
+    gap: 4px;
+}
+
+.nav-btn-bottom {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 4px;
+    border-radius: 12px;
+    color: var(--tg-theme-hint-color);
+    font-weight: bold;
+    transition: all 0.2s ease-out;
+    border: 2px solid transparent;
+    min-height: 55px;
+}
+.nav-btn-bottom .icon {
+    font-size: 1.25rem;
+    line-height: 1;
+}
+.nav-btn-bottom .label {
+    font-size: 0.65rem;
+    margin-top: 4px;
+    white-space: nowrap;
+}
+.nav-btn-bottom:hover {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.nav-btn-bottom.active {
+    color: #fff;
+    background-color: rgba(35, 134, 54, 0.4);
+    border-color: var(--tg-theme-button-color);
+    transform: translateY(-2px);
+}
+
+.back-btn {
+    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+.back-btn:hover {
+    background-color: rgba(34, 197, 94, 0.2);
+    transform: translateX(-3px);
+}
+html[dir="rtl"] .back-btn:hover {
+    transform: translateX(3px);
+}
+
+/* --- LANGUAGE SELECTOR --- */
+.language-dropdown {
+    animation: dropdownSlide 0.3s ease-out;
+}
+@keyframes dropdownSlide {
+    from { opacity: 0; transform: translateY(-10px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.lang-option:hover {
+    background-color: rgba(247, 147, 26, 0.2) !important;
+}
+html[dir="ltr"] .lang-option:hover { transform: translateX(5px); }
+html[dir="rtl"] .lang-option:hover { transform: translateX(-5px); }
+
+/* --- FORM ELEMENTS --- */
+.form-input, .form-range {
+    background-color: #010409;
+    border: 1px solid #30363d;
+    color: var(--tg-theme-text-color);
+    transition: all 0.2s ease;
+}
+.form-input:focus {
+    border-color: var(--tg-theme-button-color);
+    box-shadow: 0 0 0 3px rgba(35, 134, 54, 0.3);
+    outline: none;
+}
+.form-range::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 20px; height: 20px;
+    background: var(--tg-theme-button-color);
+    cursor: pointer; border-radius: 50%;
+}
+.form-range::-moz-range-thumb {
+    width: 20px; height: 20px;
+    background: var(--tg-theme-button-color);
+    cursor: pointer; border-radius: 50%;
+}
+
+/* --- FAQ ACCORDION --- */
+.faq-item.open .faq-question {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out;
+}
+.faq-item.open .faq-answer {
+    max-height: 500px; /* Adjust if needed */
+}
+
+/* --- CARD STYLES --- */
+.plan-card, .hardware-card {
+    transition: all 0.3s ease;
+}
+.plan-card:hover, .hardware-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    border-color: var(--tg-theme-button-color) !important;
+}
+
+/* --- RESPONSIVE ADJUSTMENTS --- */
+@media (max-width: 360px) {
+    .nav-btn-bottom .label {
+        font-size: 0.6rem;
+    }
+    .nav-btn-bottom .icon {
+        font-size: 1.1rem;
+    }
+    h1, .text-3xl {
+        font-size: 1.75rem !important;
+    }
+}
