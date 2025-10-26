@@ -8,6 +8,7 @@ from decimal import Decimal
 
 from dotenv import load_dotenv
 from flask import Flask, jsonify
+from flask_cors import CORS
 from telegram import Update, WebAppInfo, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup
 from telegram.ext import (
     Application, CommandHandler, MessageHandler, filters, ContextTypes,
@@ -46,16 +47,18 @@ logger = logging.getLogger(__name__)
 WEB_APP_URL = os.getenv("WEB_APP_URL", "https://darkcyan-manatee-795600.hostingersite.com/")
 
 # Initialize Flask app for web server
-app = Flask(__name__)
+app = Flask(__name__, static_folder='.', static_url_path='')
+CORS(app)  # Enable CORS for API access
 
 @app.route('/')
 def home():
-    """Health check endpoint for hosting platforms."""
-    return jsonify({
-        "status": "running",
-        "service": "BTC-CloudX Bot",
-        "message": "Bot is active and running!"
-    })
+    """Serve the main HTML page."""
+    return app.send_static_file('index.html')
+
+@app.route('/account')
+def account():
+    """Serve the account page."""
+    return app.send_static_file('account.html')
 
 @app.route('/health')
 def health():
@@ -70,6 +73,18 @@ def status():
         "web_app_url": WEB_APP_URL,
         "service": "BTC-CloudX Mining Platform"
     })
+
+# Import and register API routes
+from api import app as api_app
+# Register API blueprints
+for rule in api_app.url_map.iter_rules():
+    if rule.endpoint != 'static':
+        app.add_url_rule(
+            rule.rule,
+            endpoint=rule.endpoint,
+            view_func=api_app.view_functions[rule.endpoint],
+            methods=rule.methods
+        )
 
 
 # --- Command Handlers ---

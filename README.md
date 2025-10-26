@@ -1,256 +1,302 @@
-# 🚀 BTC-CloudX - نظام شامل لإدارة الاستثمار في التعدين السحابي
+# 🐍 Python Bot - BTC-CloudX
 
-## 🌟 نظرة عامة
+## 📋 نظرة عامة
 
-BTC-CloudX هي منصة متكاملة لإدارة الاستثمار في التعدين السحابي للبيتكوين، تتضمن:
-- 🤖 **بوت Telegram** متطور مع نظام حسابات كامل
-- 🌐 **تطبيق ويب** حديث مع واجهة تفاعلية
-- 💼 **لوحة تحكم Admin** لإدارة المنصة
-- 💰 **نظام إيداع وسحب** متكامل
-- 🔐 **REST API** للتواصل الآمن
-- 📊 **قاعدة بيانات** منظمة لتتبع كل العمليات
-
-**الإصدار:** 2.0.0 (محدّث بالكامل)  
-**اللغات المدعومة:** العربية، الإنجليزية، الصينية
-
-## ✨ المميزات الجديدة في النسخة 2.0
-
-### 👥 نظام إدارة الحسابات
-- ✅ **تسجيل مستخدمين** عبر البوت مع بيانات كاملة
-- ✅ **كود تحقق فريد** لكل مستخدم (BTC-X-77-XXXXX)
-- ✅ **ملف شخصي** مع رصيد ومعلومات كاملة
-- ✅ **سجل معاملات** شامل لكل مستخدم
-
-### 💰 نظام الإيداع والسحب
-- ✅ **5 محافظ رقمية**: USDT (TRC20/ERC20), BTC, ETH, BNB
-- ✅ **طلبات إيداع** مع رفع صور الإثبات
-- ✅ **طلبات سحب** إلى محافظ المستخدمين
-- ✅ **تتبع حالة الطلبات**: معلقة/موافق/مرفوض
-
-### 🔐 لوحة تحكم Admin
-- ✅ **إدارة المستخدمين**: عرض وتعديل جميع المستخدمين
-- ✅ **الموافقة على الإيداعات**: مراجعة ومعالجة الطلبات
-- ✅ **معالجة السحوبات**: تأكيد وتحويل الأموال
-- ✅ **إحصائيات شاملة**: الخزنة، الإيداعات، السحوبات
-- ✅ **إدارة المحافظ**: تحديث عناوين محافظ الشركة
-
-### 🌐 REST API
-- ✅ **مصادقة آمنة** بـ JWT Tokens
-- ✅ **Endpoints كاملة** لجميع العمليات
-- ✅ **CORS Support** للتكامل مع الموقع
-- ✅ **رفع ملفات** للصور والإثباتات
-
-### 📊 قاعدة البيانات
-- ✅ **SQLite محلية** سهلة النشر
-- ✅ **8 جداول منظمة**: مستخدمين، محافظ، معاملات، إيداعات، سحوبات
-- ✅ **Foreign Keys** لربط البيانات
-- ✅ **Indexes** لتحسين الأداء
-
-## 📁 هيكل المشروع المُحدث
-
-```
-BTC-CloudX-main/
-├── 🤖 البوت والخادم
-│   ├── main.py                 # البوت الرئيسي + Flask server
-│   ├── database.py             # قاعدة البيانات الكاملة ⭐ جديد
-│   ├── api.py                  # REST API ⭐ جديد
-│   ├── auth_handlers.py        # نظام التسجيل والحسابات ⭐ جديد
-│   ├── admin_panel.py          # لوحة تحكم Admin ⭐ جديد
-│   ├── localization.py         # الترجمات
-│   ├── data_store.py           # بيانات الخطط والأجهزة
-│   ├── helpers.py              # دوال مساعدة (محدثة)
-│   └── devices.py              # إدارة الأجهزة
-│
-├── 🌐 الموقع
-│   ├── index.html              # الصفحة الرئيسية
-│   ├── account.html            # صفحة الحساب ⭐ جديد
-│   ├── account.js              # JavaScript للحساب ⭐ جديد
-│   ├── script.js               # JavaScript الرئيسي
-│   ├── languages.js            # ملف اللغات
-│   └── styles.css              # التصميم
-│
-├── 📊 البيانات
-│   ├── btc_cloudx.db           # قاعدة البيانات ⭐ (تُنشأ تلقائياً)
-│   └── uploads/                # مجلد صور الإيداعات ⭐
-│       └── proofs/
-│
-├── ⚙️ الإعدادات
-│   ├── .env                    # المتغيرات البيئية
-│   ├── .env.example            # قالب البيئة (محدث)
-│   ├── requirements.txt        # المكتبات (محدث)
-│   ├── runtime.txt             # إصدار Python
-│   ├── Procfile                # للنشر
-│   └── render.yaml             # إعدادات Render
-│
-└── 📖 التوثيق
-    ├── README.md               # هذا الملف
-    ├── SETUP_GUIDE.md          # دليل الإعداد الشامل ⭐ جديد
-    └── QUICK_START.md          # البدء السريع ⭐ جديد
-```
-
-## 🚀 Features
-
-### 💻 Web Application
-- **Interactive Dashboard**: Modern, responsive interface
-- **3D Animations**: Eye-catching Bitcoin animations
-- **Investment Calculator**: Custom plan creation tool
-- **Hardware Showcase**: Mining equipment information
-- **FAQ Section**: Comprehensive help system
-- **Multi-Language**: Arabic, English, Chinese support
-
-### 🤖 Telegram Bot
-- **Enhanced Messages**: Improved text with emojis and better formatting
-- **Multi-Language**: Complete translation support
-- **Investment Plans**: Detailed plan information
-- **Subscription System**: Unique user codes
-- **Support Integration**: Direct contact with support team
-
-## 🛠️ التثبيت والإعداد
-
-### المتطلبات الأساسية
-- ✅ Python 3.11+
-- ✅ توكن بوت Telegram من @BotFather
-- ✅ معرف Telegram للأدمن
-
-### 🚀 البدء السريع (5 دقائق)
-
-**اقرأ دليل البدء السريع الكامل:** [`QUICK_START.md`](QUICK_START.md)
-
-```bash
-# 1. انسخ ملف البيئة
-cp .env.example .env
-
-# 2. ثبّت المكتبات
-pip install -r requirements.txt
-
-# 3. عدّل .env (أضف التوكن ومعرف Admin)
-
-# 4. شغّل البوت
-python main.py
-```
-
-✅ **تم! البوت شغال الآن**
-
-### 📖 الإعداد الشامل
-
-**اقرأ الدليل الكامل:** [`SETUP_GUIDE.md`](SETUP_GUIDE.md)
-
-يشمل:
-- تخصيص المحافظ الرقمية
-- إعداد API
-- النشر على Render/Heroku
-- حل المشاكل الشائعة
-
-## 🌐 Language Support
-
-The platform supports three languages with complete translations:
-
-- **🇸🇦 Arabic (العربية)**: Primary language with RTL support
-- **🇺🇸 English**: International users
-- **🇨🇳 Chinese (中文)**: Asian market support
-
-### Adding New Languages
-
-1. Add language data to `languages.js`
-2. Update `localization.py` with bot translations
-3. Add language option to the dropdown menu
-4. Update `LANGUAGE_CONFIG` in `script.js`
-
-## 🎯 Investment Plans
-
-### Available Plans
-1. **Professional Contract (Pro)** - $200
-   - 10 TH/s mining power
-   - $0.41 daily profit
-   - $148.73 annual profit
-
-2. **Advanced Contract** - $500
-   - 26 TH/s mining power
-   - $1.06 daily profit
-   - $386.71 annual profit
-
-3. **Elite Hydro Contract** - $1000
-   - 55 TH/s mining power
-   - $2.41 daily profit
-   - $878.19 annual profit
-
-### Custom Plans
-Users can create custom investment plans with:
-- Flexible investment amounts (minimum $1000)
-- Contract duration (1-3 years)
-- Calculated returns and bonuses
-
-## 🔧 Technical Details
-
-### Frontend Technologies
-- **HTML5**: Semantic markup
-- **CSS3**: Advanced styling with animations
-- **JavaScript ES6+**: Modern JavaScript features
-- **Tailwind CSS**: Utility-first CSS framework
-
-### Backend Technologies
-- **Python 3.8+**: Core application
-- **python-telegram-bot**: Telegram integration
-- **Decimal**: Precise financial calculations
-- **Environment Variables**: Secure configuration
-
-### Key Features
-- **3D Animations**: CSS3 transforms and JavaScript
-- **Responsive Design**: Mobile-first approach
-- **Multi-Language**: Dynamic content switching
-- **Performance Optimized**: Efficient resource loading
-
-## 🔐 Security Features
-
-- **Data Encryption**: Secure user data handling
-- **Input Validation**: Protection against malicious input
-- **Environment Variables**: Secure configuration management
-- **Rate Limiting**: Protection against abuse
-
-## 📱 Mobile Optimization
-
-- **Responsive Layout**: Adapts to all screen sizes
-- **Touch-Friendly**: Optimized for mobile interaction
-- **Fast Loading**: Optimized for mobile networks
-- **Progressive Enhancement**: Works on all devices
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
-
-## 📞 Support
-
-For technical support or questions:
-- **Telegram**: Contact through the bot
-- **Email**: support@btc-cloudx.com
-- **Documentation**: Check this README
-
-## 📄 License
-
-This project is proprietary software. All rights reserved.
-
-## 🔄 Recent Updates
-
-### Version 2.0 (Latest)
-- ✅ 3D Bitcoin animation background
-- ✅ Enhanced language selector with dropdown
-- ✅ Improved text quality (removed underscores, added emojis)
-- ✅ Complete translation coverage
-- ✅ Modern UI/UX improvements
-- ✅ Better mobile responsiveness
-- ✅ Performance optimizations
-
-### Upcoming Features
-- 🔄 Real-time profit tracking
-- 🔄 Advanced analytics dashboard
-- 🔄 Payment gateway integration
-- 🔄 Push notifications
-- 🔄 Advanced security features
+بوت Telegram احترافي مع REST API لمنصة BTC-CloudX.
 
 ---
 
-**BTC-CloudX** - Your gateway to secure cloud mining investment 🚀
+## 📁 محتويات المجلد:
+
+```
+python-bot/
+├── main.py               # البوت الرئيسي
+├── api.py                # REST API (Flask)
+├── database.py           # قاعدة بيانات PostgreSQL
+├── auth_handlers.py      # معالجات المصادقة والتسجيل
+├── admin_panel.py        # لوحة الأدمن
+├── localization.py       # نظام اللغات (3 لغات)
+├── data_store.py         # تخزين البيانات
+├── command_processors.py # معالجات الأوامر
+├── helpers.py            # دوال مساعدة
+├── devices.py            # إدارة الأجهزة
+├── plan.py               # الخطط الاستثمارية
+├── create_plan.py        # إنشاء خطط
+├── requirements.txt      # المكتبات المطلوبة
+├── runtime.txt           # إصدار Python
+├── Procfile              # أمر التشغيل
+├── render.yaml           # إعدادات Render
+├── .env.example          # مثال للمتغيرات
+└── .env                  # المتغيرات الفعلية (لا ترفعه!)
+```
+
+---
+
+## ✨ الميزات:
+
+```
+✅ بوت Telegram متكامل
+✅ REST API (25+ endpoint)
+✅ PostgreSQL (7 جداول)
+✅ كود تحقق فريد (BTC-X-77-XXXXX)
+✅ 5 محافظ رقمية:
+   - USDT (TRC20)
+   - Bitcoin (BTC)
+   - Ethereum (ETH)
+   - Binance Coin (BNB)
+   - USD Coin (USDC)
+✅ نظام إيداع (رفع صور)
+✅ نظام سحب (حساب رسوم)
+✅ JWT Authentication
+✅ لوحة أدمن شاملة
+✅ 3 لغات (عربي، إنجليزي، صيني)
+```
+
+---
+
+## 🚀 التشغيل المحلي:
+
+### 1️⃣ تثبيت المتطلبات:
+```bash
+pip install -r requirements.txt
+```
+
+### 2️⃣ إعداد .env:
+```bash
+cp .env.example .env
+
+# عدّل .env:
+BOT_TOKEN=your_bot_token
+DATABASE_URL=postgresql://user:pass@localhost/dbname
+ADMIN_TELEGRAM_IDS=your_telegram_id
+JWT_SECRET_KEY=your_secret_key
+```
+
+### 3️⃣ تشغيل البوت:
+```bash
+python main.py
+```
+
+### 4️⃣ اختبار:
+```
+افتح Telegram → ابحث عن البوت
+أرسل /start
+```
+
+---
+
+## 🌐 النشر على Render:
+
+### الطريقة السريعة:
+
+```bash
+# 1. ارفع على GitHub:
+git init
+git add .
+git commit -m "Initial commit"
+git push origin main
+
+# 2. من Render Dashboard:
+- New Web Service
+- اربط GitHub
+- اختر هذا المجلد
+- Deploy!
+
+# 3. أنشئ PostgreSQL:
+- New PostgreSQL
+- انسخ DATABASE_URL
+
+# 4. أضف Environment Variables:
+BOT_TOKEN
+DATABASE_URL
+ADMIN_TELEGRAM_IDS
+JWT_SECRET_KEY
+WEB_APP_URL
+```
+
+📖 **الدليل الكامل:** `../docs/DEPLOYMENT.md`
+
+---
+
+## 🗄️ قاعدة البيانات:
+
+### الجداول (7):
+
+1. **users** - المستخدمين
+   ```sql
+   - id, telegram_id, verification_code
+   - first_name, last_name, email
+   - main_balance, reward_balance
+   ```
+
+2. **user_wallets** - محافظ المستخدمين
+   ```sql
+   - user_id, wallet_type, wallet_address
+   ```
+
+3. **company_wallets** - محافظ الشركة
+   ```sql
+   - wallet_type, wallet_address, network
+   - min_deposit
+   ```
+
+4. **deposit_requests** - طلبات الإيداع
+   ```sql
+   - user_id, amount, proof_image
+   - status, created_at
+   ```
+
+5. **withdrawal_requests** - طلبات السحب
+   ```sql
+   - user_id, amount, wallet_address
+   - status, transaction_hash
+   ```
+
+6. **transactions** - سجل المعاملات
+   ```sql
+   - user_id, type, amount
+   - balance_before, balance_after
+   ```
+
+7. **admins** - المدراء
+   ```sql
+   - telegram_id, username
+   - permissions
+   ```
+
+---
+
+## 🔌 API Endpoints:
+
+### المصادقة:
+```
+POST /api/auth/register
+POST /api/auth/login
+POST /api/auth/verify-code
+```
+
+### المستخدمين:
+```
+GET  /api/user/profile
+PUT  /api/user/profile
+GET  /api/user/balance
+POST /api/user/wallet
+```
+
+### الإيداع/السحب:
+```
+POST /api/deposit/request
+GET  /api/deposit/history
+POST /api/withdrawal/request
+GET  /api/withdrawal/history
+```
+
+### الأدمن:
+```
+GET  /api/admin/users
+PUT  /api/admin/user/{id}
+POST /api/admin/deposit/approve
+POST /api/admin/withdrawal/approve
+```
+
+📖 **توثيق API الكامل:** `../docs/FEATURES_OVERVIEW.md`
+
+---
+
+## 💬 أوامر البوت:
+
+### للمستخدمين:
+```
+/start        - بدء البوت
+/register     - تسجيل حساب جديد
+/login        - تسجيل الدخول
+/mycode       - عرض كود التحقق
+/balance      - عرض الرصيد
+/deposit      - طلب إيداع
+/withdraw     - طلب سحب
+/wallet       - إدارة المحافظ
+/help         - المساعدة
+/language     - تغيير اللغة
+```
+
+### للمدراء:
+```
+/admin        - لوحة الأدمن
+/users        - إدارة المستخدمين
+/deposits     - طلبات الإيداع
+/withdrawals  - طلبات السحب
+/stats        - الإحصائيات
+```
+
+---
+
+## 🔐 الأمان:
+
+```
+✅ JWT للمصادقة
+✅ تشفير كلمات المرور
+✅ التحقق من الصلاحيات
+✅ حماية من SQL Injection
+✅ معالجة الأخطاء
+✅ تسجيل الإجراءات
+```
+
+---
+
+## 🌍 اللغات المدعومة:
+
+```
+✅ العربية (ar)
+✅ الإنجليزية (en)
+✅ الصينية المبسطة (zh)
+```
+
+---
+
+## 🔧 المتطلبات:
+
+```
+Python >= 3.11
+PostgreSQL >= 13
+python-telegram-bot
+Flask
+Flask-CORS
+psycopg2-binary
+PyJWT
+```
+
+---
+
+## 📞 للمساعدة:
+
+```
+📖 ../docs/DEPLOYMENT.md - دليل النشر
+📖 ../docs/TROUBLESHOOTING.md - حل المشاكل
+📖 ../docs/FEATURES_OVERVIEW.md - شرح الميزات
+```
+
+---
+
+## 💰 التكلفة:
+
+```
+Render Free Tier:    $0/شهر
+PostgreSQL Free:     $0/شهر (1GB)
+
+إجمالي:             $0/شهر 🎉
+```
+
+---
+
+## 🎯 ملاحظات مهمة:
+
+```
+⚠️ لا ترفع .env على GitHub
+⚠️ غيّر JWT_SECRET_KEY
+⚠️ أضف ADMIN_TELEGRAM_IDS الصحيح
+⚠️ استخدم HTTPS في الإنتاج
+```
+
+---
+
+**🚀 جاهز للنشر! ابدأ الآن من ../docs/DEPLOYMENT.md**

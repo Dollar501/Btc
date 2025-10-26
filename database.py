@@ -13,43 +13,91 @@ from decimal import Decimal
 from typing import Optional, Dict, List, Tuple
 import os
 
+# Try to import psycopg2 for PostgreSQL support
+try:
+    import psycopg2
+    from psycopg2.extras import RealDictCursor
+    HAS_POSTGRES = True
+except ImportError:
+    HAS_POSTGRES = False
+
 
 class Database:
-    """مدير قاعدة البيانات الرئيسي"""
+    """مدير قاعدة البيانات الرئيسي - يدعم PostgreSQL و SQLite"""
     
     def __init__(self, db_path: str = "btc_cloudx.db"):
-        self.db_path = db_path
+        # Check if DATABASE_URL is provided (for PostgreSQL)
+        self.database_url = os.getenv('DATABASE_URL')
+        
+        if self.database_url:
+            # Use PostgreSQL
+            if self.database_url.startswith('postgres://'):
+                # Render uses postgres:// but psycopg2 needs postgresql://
+                self.database_url = self.database_url.replace('postgres://', 'postgresql://', 1)
+            self.use_postgres = True
+            print("📊 Using PostgreSQL database")
+        else:
+            # Use SQLite (for local development)
+            self.db_path = db_path
+            self.use_postgres = False
+            print(f"📊 Using SQLite database: {db_path}")
+        
         self.init_database()
     
     def get_connection(self):
         """إنشاء اتصال بقاعدة البيانات"""
-        conn = sqlite3.connect(self.db_path)
-        conn.row_factory = sqlite3.Row  # للحصول على النتائج كـ dictionaries
-        return conn
+        if self.use_postgres:
+            conn = psycopg2.connect(self.database_url, cursor_factory=RealDictCursor)
+            return conn
+        else:
+            conn = sqlite3.connect(self.db_path)
+            conn.row_factory = sqlite3.Row
+            return conn
     
     def init_database(self):
         """إنشاء جداول قاعدة البيانات"""
         conn = self.get_connection()
         cursor = conn.cursor()
         
-        # جدول المستخدمين
-        cursor.execute('''
-            CREATE TABLE IF NOT EXISTS users (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                telegram_id INTEGER UNIQUE NOT NULL,
-                verification_code TEXT UNIQUE NOT NULL,
-                first_name TEXT NOT NULL,
-                last_name TEXT NOT NULL,
-                email TEXT UNIQUE NOT NULL,
-                phone TEXT UNIQUE NOT NULL,
-                email_verified INTEGER DEFAULT 0,
-                phone_verified INTEGER DEFAULT 0,
-                account_status TEXT DEFAULT 'pending',
-                balance REAL DEFAULT 0.0,
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-            )
-        ''')
+        # SQL syntax differs between SQLite and PostgreSQL
+        if self.use_postgres:
+            # PostgreSQL syntax
+            users_table = '''
+                CREATE TABLE IF NOT EXISTS users (
+                    id SERIAL PRIMARY KEY,
+                    telegram_id BIGINT UNIQUE NOT NULL,
+                    verification_code TEXT UNIQUE NOT NULL,
+                    first_name TEXT NOT NULL,
+                    last_name TEXT NOT NULL,
+                    email TEXT UNIQUE NOT NULL,
+                    phone TEXT UNIQUE NOT NULL,
+                    email_verified INTEGER DEFAULT 0,
+                    phone_verified INTEGER DEFAULT 0,
+                    account_status TEXT DEFAULT 'pending',
+                    balance NUMERIC(10, 2) DEFAULT 0.0,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            '''
+        else:
+            # SQLite syntax
+            users_table = '''
+                CREATE TABLE IF NOT EXISTS users (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    telegram_id INTEGER UNIQUE NOT NULL,
+                    verification_code TEXT UNIQUE NOT NULL,
+                    first_name TEXT NOT NULL,
+                    last_name TEXT NOT NULL,
+                    email TEXT UNIQUE NOT NULL,
+                    phone TEXT UNIQUE NOT NULL,
+                    email_verified INTEGER DEFAULT 0,
+                    phone_verified INTEGER DEFAULT 0,
+                    account_status TEXT DEFAULT 'pending',
+                    balance REAL DEFAULT 0.0,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            '''
+        
+        cursor.execute(users_table + ')')
         
         # جدول المحافظ الرقمية للمستخدمين
         cursor.execute('''
