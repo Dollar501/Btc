@@ -3,7 +3,7 @@ services:
     name: btc-cloudx-bot
     env: python
     runtime: python-3.11.10
-    buildCommand: pip install -r requirements.txt
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
     startCommand: python main.py
     envVars:
       - key: BOT_TOKEN
